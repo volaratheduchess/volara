@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Volara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+
+    /* ===== GALLERY GRID ===== */
+    .gallery-grid {
+      columns: 3;
+      column-gap: 14px;
+      margin-top: 16px;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 14px;
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--violet-dim);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .gallery-item:hover {
+      border-color: var(--violet-bright);
+      transform: scale(1.01);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .gallery-item .g-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(6,0,15,0.9), transparent);
+      padding: 20px 12px 10px;
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.82em;
+      color: var(--ink-dim);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-item:hover .g-caption { opacity: 1; }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-overlay.open { display: flex; }
+    .lightbox-overlay img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 6px;
+      border: 1px solid var(--violet-dim);
+    }
+    .lb-close {
+      position: fixed;
+      top: 20px; right: 24px;
+      background: none; border: none;
+      color: var(--ink);
+      font-size: 2em;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid { columns: 2; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<div class="sprocket-cameo" id="sprocket">
+  <img src="https://s13.gifyu.com/images/bmfYf.png" alt="Sprocket">
+  <span>⚙ The Mayor approves of this website.</span>
+</div>
+
+<canvas id="embers"></canvas>
+
+<nav class="topnav">
+  <a href="index.html" class="nav-logo">⚙ Volara</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="bots.html">Bots & Lore</a>
+    <a href="foundry.html">The Foundry</a>
+    <a href="gallery.html" class="active">Gallery</a>
+    <a href="crew.html">Chaos Crew</a>
+  </div>
+  <button class="nav-burger" onclick="toggleMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="bots.html">Bots & Lore</a>
+  <a href="foundry.html">The Foundry</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="crew.html">Chaos Crew</a>
+</div>
+
+<div class="page-header">
+  <div class="page-eyebrow">Art · Aesthetics · Beautiful Things Born of Chaos</div>
+  <h1>Gallery</h1>
+  <p class="subtitle">Everything the Foundry has made that deserves to be seen.</p>
+  <div class="v-divider"><span>⚙ ✦ ⚙</span></div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="v-card" style="margin-bottom: 32px;">
+    <h2>The Collection</h2>
+    <p>
+      Art from the Foundry, art from Evelia, and anything else that came out of the chaos beautifully enough
+      to deserve a wall. Click any image to enlarge. Add yours by dropping into the Discord.
+    </p>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid">
+
+    <!-- Volara portrait -->
+    <div class="gallery-item" onclick="openLightbox('https://s13.gifyu.com/images/bmfYc.md.png')">
+      <img src="https://s13.gifyu.com/images/bmfYc.md.png" alt="Volara">
+      <div class="g-caption">Volara — the duchess</div>
+    </div>
+
+    <!-- Sprocket -->
+    <div class="gallery-item" onclick="openLightbox('https://s13.gifyu.com/images/bmfYf.png')">
+      <img src="https://s13.gifyu.com/images/bmfYf.png" alt="Sprocket">
+      <div class="g-caption">Sprocket — Mayor of the Brass Foundry</div>
+    </div>
+
+    <!-- Murk -->
+    <div class="gallery-item" onclick="openLightbox('https://s13.gifyu.com/images/bmfYM.png')">
+      <img src="https://s13.gifyu.com/images/bmfYM.png" alt="Murk">
+      <div class="g-caption">Murk — do not approach before coffee</div>
+    </div>
+
+    <!-- Foundry hero -->
+    <div class="gallery-item" onclick="openLightbox('https://s13.gifyu.com/images/bmcJV.jpg')">
+      <img src="https://s13.gifyu.com/images/bmcJV.jpg" alt="The Brass Foundry">
+      <div class="g-caption">The Brass Foundry — where gears turn and legends are forged</div>
+    </div>
+
+
+    <!-- Volara full body -->
+    <div class="gallery-item" onclick="openLightbox('https://s13.gifyu.com/images/bmcA8.png')">
+      <img src="https://s13.gifyu.com/images/bmcA8.png" alt="Volara">
+      <div class="g-caption">Volara — full portrait</div>
+    </div>
+
+    <!-- placeholder for more -->
+    <div class="gallery-item" style="opacity: 0.4; border-style: dashed; min-height: 120px; display: flex; align-items: center; justify-content: center;">
+      <span style="font-family: 'IM Fell English', serif; font-style: italic; color: var(--violet-dim); font-size: 0.9em; text-align: center; padding: 20px;">More art coming.<br>The forge never rests.</span>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <span class="f-gear">⚙</span>
+  <p>Volara · Duchess of Brass & Velvet · Leave your morality at the door.</p>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+  function openLightbox(src) {
+    document.getElementById('lb-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lb-img').src = '';
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+</body>
+</html>

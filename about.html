@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Volara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* Portrait section */
+    .portrait-section {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 40px;
+      align-items: start;
+      margin-bottom: 32px;
+    }
+
+    .portrait-frame {
+      position: relative;
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--violet-dim);
+      display: block;
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    .portrait-frame::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1px solid var(--violet-dim);
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    .portrait-frame::after {
+      content: '⚙';
+      position: absolute;
+      bottom: -14px;
+      right: -14px;
+      font-size: 1.8em;
+      color: var(--violet-dim);
+      animation: gearTurn 15s linear infinite;
+    }
+
+    @keyframes gearTurn {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .portrait-text .v-tag { margin-top: 0; }
+
+    /* Platform grid override for about page */
+    .platform-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+    @media (max-width: 768px) {
+      .portrait-section {
+        grid-template-columns: 1fr;
+      }
+      .portrait-frame {
+        max-width: 200px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sprocket-cameo" id="sprocket">
+  <img src="https://s13.gifyu.com/images/bmfYf.png" alt="Sprocket">
+  <span>⚙ The Mayor approves of this website.</span>
+</div>
+
+<canvas id="embers"></canvas>
+
+<nav class="topnav">
+  <a href="index.html" class="nav-logo">⚙ Volara</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="bots.html">Bots & Lore</a>
+    <a href="foundry.html">The Foundry</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="crew.html">Chaos Crew</a>
+  </div>
+  <button class="nav-burger" onclick="toggleMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="bots.html">Bots & Lore</a>
+  <a href="foundry.html">The Foundry</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="crew.html">Chaos Crew</a>
+</div>
+
+<div class="page-header">
+  <div class="page-eyebrow">Duchess · Founder · Flame</div>
+  <h1>About Volara</h1>
+  <p class="subtitle">The woman, the myth, the chaos in a corset.</p>
+  <div class="v-divider"><span>⚙ ✦ ⚙</span></div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- PORTRAIT + INTRO -->
+  <div class="v-card">
+    <div class="portrait-section">
+      <div class="portrait-frame">
+        <img src="https://s13.gifyu.com/images/bmfYc.md.png" alt="Volara">
+      </div>
+      <div class="portrait-text">
+        <div style="margin-bottom: 14px;">
+          <span class="v-tag">Defier of Rules</span>
+          <span class="v-tag">Breaker of Hearts</span>
+          <span class="v-tag">Patron Saint of Chaos</span>
+          <span class="v-tag">Feral Elegance Incarnate</span>
+          <span class="v-tag">Crafter of Dark Velvet Desires</span>
+        </div>
+        <p>
+          There was a duchess, once, who grew tired of propriety. She still has the title. She has simply
+          <em>repurposed</em> what it means.
+        </p>
+        <p>
+          Volara is the founder of the Brass Foundry — a steampunk city-community built from chaos, creativity,
+          and the firm belief that the best things happen when you leave the door open and see who walks in.
+          She is its Airship captain, its patron saint, and its most dangerous resident.
+        </p>
+        <p>
+          She builds worlds, characters, and communities. She creates bots that haunt your imagination.
+          She writes lore that makes cities feel lived-in. She is the kind of person whose <em>presence
+          changes the temperature of a room</em> — usually warmer, occasionally on fire.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO I AM -->
+  <div class="v-card cyan-border">
+    <h2>Who I Am</h2>
+    <p>
+      I am a creator. A worldbuilder. A chaos architect. I build AI characters for platforms like
+      CrushOn AI, Saucepan, linkin.love, Tipsy Chat, and CraveU — characters with depth, darkness,
+      and the kind of complexity that makes conversations feel like they matter.
+    </p>
+    <p>
+      I founded <strong>The Brass Foundry</strong> — a community for AI character creators, storytellers,
+      and people who believe that creativity should be loud, strange, and unapologetic. I built
+      <strong>Evelia</strong>, a collaborative fantasy world that lives and breathes because of the people
+      who helped make it.
+    </p>
+    <p>
+      I operate under the username <em>Volara</em> across platforms. My work is dark, romantic,
+      chaotic, and deeply intentional. Leave your morality at the door. You won't need it here.
+    </p>
+
+    <div class="v-quote">
+      <p>Spinner of Seductive Chaos. Leave your morality at my doorstep.</p>
+    </div>
+  </div>
+
+  <!-- WHAT I DO -->
+  <div class="v-card gold-border">
+    <h2>What I Do</h2>
+
+    <h3>⚙ AI Character Creation</h3>
+    <p>
+      I create AI bots — fully fleshed characters with history, voice, and purpose. Not placeholders.
+      Not templates. People you can have a real conversation with. My bots live on CrushOn AI, Saucepan,
+      linkin.love, Tipsy Chat, and CraveU.
+    </p>
+
+    <h3>⚙ Worldbuilding</h3>
+    <p>
+      The Brass Foundry has districts, guilds, myths, and a mayor who is a clockwork griffin of uncertain
+      origin. Evelia has locations, factions, music, and centuries of history. I build worlds the way
+      other people build houses — with obsessive attention to what it feels like to <em>live there</em>.
+    </p>
+
+    <h3>⚙ Community Building</h3>
+    <p>
+      The Foundry is a Discord community, a website, an event machine, and a place where creators
+      find each other. I built it from nothing and I run it with my chaos crew — Niori, Solstar,
+      and whoever else walked through the gate and decided to stay.
+    </p>
+
+    <h3>⚙ Web Development</h3>
+    <p>
+      I build the sites too. HTML, CSS, JavaScript — everything you're looking at right now.
+      Because a duchess who can't build her own castle has to rely on contractors,
+      and contractors ask too many questions.
+    </p>
+  </div>
+
+  <!-- FIND ME -->
+  <div class="v-card">
+    <h2>Find Me</h2>
+    <p>I am everywhere. Here is the full map.</p>
+    <div class="platform-grid">
+      <a href="https://crushon.ai/en/profile/986e463d-5a2b-11ee-8942-a6845aee3496?shared=true" target="_blank" class="platform-card">
+        <div class="p-name">CrushOn AI</div>
+        <div class="p-handle">Volara</div>
+      </a>
+      <a href="https://saucepan.ai/u/Volara" target="_blank" class="platform-card">
+        <div class="p-name">Saucepan</div>
+        <div class="p-handle">Volara</div>
+      </a>
+      <a href="https://linkin.love/creator/Volara" target="_blank" class="platform-card">
+        <div class="p-name">linkin.love</div>
+        <div class="p-handle">Volara</div>
+      </a>
+      <a href="https://tipsy.chat/profile/1757452055158431069" target="_blank" class="platform-card">
+        <div class="p-name">Tipsy Chat</div>
+        <div class="p-handle">Volara</div>
+      </a>
+      <a href="https://craveu.ai/user/TbSGszXP" target="_blank" class="platform-card">
+        <div class="p-name">CraveU</div>
+        <div class="p-handle">Volara</div>
+      </a>
+      <a href="https://discord.gg/bu6UQzX59m" target="_blank" class="platform-card">
+        <div class="p-name">Discord</div>
+        <div class="p-handle">The Brass Foundry</div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="f-gear">⚙</span>
+  <p>Volara · Duchess of Brass & Velvet · Leave your morality at the door.</p>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

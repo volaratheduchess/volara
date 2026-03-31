@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Chaos Crew — Volara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+
+    /* ===== BRASS PALETTE OVERRIDES (neutral between both sites) ===== */
+    :root {
+      --brass:        #c9a44c;
+      --brass-dim:    #7a5a20;
+      --brass-dark:   #3a2a0a;
+      --brass-bright: #f0c860;
+      --parchment:    #d4c09a;
+      --parchment-dim:#7a6840;
+    }
+
+    /* ===== PAGE INTRO ===== */
+    .crew-intro {
+      font-family: 'IM Fell English', serif;
+      color: var(--parchment);
+      line-height: 1.95;
+      font-size: 1.05em;
+      margin-bottom: 12px;
+    }
+    .crew-intro em { color: var(--brass-bright); font-style: italic; }
+
+    /* ===== CREW GRID ===== */
+    .crew-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    /* ===== CREW CARD ===== */
+    .crew-card {
+      background: linear-gradient(160deg, #1e1608, #110e04);
+      border: 1px solid var(--brass-dim);
+      border-radius: 10px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .crew-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(201,164,76,0.25);
+    }
+
+    /* accent bar — unique per member */
+    .crew-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .crew-card.volara-card::before  { background: linear-gradient(to right, #5900ff, #00ffee); }
+    .crew-card.niori-card::before   { background: linear-gradient(to right, #39ff14, #1a7a08); }
+    .crew-card.foundry-card::before { background: linear-gradient(to right, var(--brass), var(--brass-dim)); }
+    .crew-card.placeholder::before  { background: linear-gradient(to right, #3a3a3a, #1a1a1a); }
+
+    /* ===== CARD PORTRAIT ===== */
+    .crew-portrait {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      filter: saturate(0.9) contrast(1.05);
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .crew-card:hover .crew-portrait {
+      filter: saturate(1.15) contrast(1.1);
+      transform: scale(1.03);
+    }
+
+    .crew-portrait-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* gradient fade from portrait into body */
+    .crew-portrait-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 60px;
+      background: linear-gradient(to top, #110e04, transparent);
+      pointer-events: none;
+    }
+
+    /* placeholder portrait */
+    .crew-portrait-placeholder {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(145deg, #1e1608, #0d0a02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+      opacity: 0.3;
+    }
+
+    /* ===== CARD BODY ===== */
+    .crew-body {
+      padding: 18px 22px 22px;
+    }
+
+    .crew-name {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 1em;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+
+    .crew-card.volara-card  .crew-name { color: #00ffee; text-shadow: 0 0 10px rgba(0,255,238,0.3); }
+    .crew-card.niori-card   .crew-name { color: #39ff14; text-shadow: 0 0 10px rgba(57,255,20,0.3); }
+    .crew-card.foundry-card .crew-name { color: var(--brass-bright); }
+    .crew-card.placeholder  .crew-name { color: #4a4a4a; }
+
+    .crew-role {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.82em;
+      color: var(--parchment-dim);
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .crew-desc {
+      font-family: 'IM Fell English', serif;
+      font-size: 0.9em;
+      color: var(--parchment);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .crew-desc em { font-style: italic; color: var(--brass-bright); }
+
+    /* ===== CARD TAGS ===== */
+    .crew-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .crew-tag {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.75em;
+      padding: 2px 10px;
+      border-radius: 3px;
+      border: 1px solid var(--brass-dim);
+      color: var(--parchment-dim);
+      background: rgba(201,164,76,0.06);
+    }
+
+    /* ===== CARD LINKS ===== */
+    .crew-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .crew-link {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 0.65em;
+      letter-spacing: 2px;
+      padding: 7px 14px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      border: 1px solid;
+    }
+
+    .crew-link.brass {
+      background: linear-gradient(to bottom, var(--brass-dark), #0d0a02);
+      color: var(--brass-bright);
+      border-color: var(--brass-dim);
+    }
+    .crew-link.brass:hover {
+      border-color: var(--brass-bright);
+      box-shadow: 0 0 14px rgba(201,164,76,0.35);
+      transform: translateY(-1px);
+    }
+
+    .crew-link.violet {
+      background: linear-gradient(to bottom, #1a0040, #0d0020);
+      color: #00ffee;
+      border-color: #3a006a;
+    }
+    .crew-link.violet:hover {
+      border-color: #5900ff;
+      box-shadow: 0 0 14px rgba(89,0,255,0.3);
+      transform: translateY(-1px);
+    }
+
+    .crew-link.swamp {
+      background: linear-gradient(to bottom, #0a1a06, #060e04);
+      color: #39ff14;
+      border-color: #1a5a0a;
+    }
+    .crew-link.swamp:hover {
+      border-color: #39ff14;
+      box-shadow: 0 0 14px rgba(57,255,20,0.3);
+      transform: translateY(-1px);
+    }
+
+    /* ===== PLACEHOLDER CARD ===== */
+    .crew-card.placeholder {
+      border-style: dashed;
+      border-color: #2a2a2a;
+      opacity: 0.5;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .crew-card.placeholder .crew-name { color: #3a3a3a; }
+    .crew-card.placeholder .crew-role,
+    .crew-card.placeholder .crew-desc { color: #2a2a2a; }
+
+    /* ===== QUOTE ===== */
+    .crew-quote {
+      border-left: 2px solid var(--brass-dim);
+      padding: 14px 22px;
+      margin: 28px 0;
+      background: rgba(201,164,76,0.04);
+      border-radius: 0 6px 6px 0;
+    }
+    .crew-quote p {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 1.1em;
+      color: var(--brass-bright);
+      margin: 0;
+      line-height: 1.75;
+    }
+    .crew-quote cite {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.82em;
+      color: var(--brass-dim);
+      letter-spacing: 1px;
+    }
+
+    /* ===== SECTION LABEL ===== */
+    .section-label {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 0.78em;
+      letter-spacing: 4px;
+      color: var(--brass-dim);
+      text-transform: uppercase;
+      margin: 40px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--brass-dim), transparent);
+    }
+
+    @media (max-width: 768px) {
+      .crew-grid { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="sprocket-cameo" id="sprocket">
+  <img src="https://s13.gifyu.com/images/bmfYf.png" alt="Sprocket">
+  <span>⚙ The Mayor approves of this crew.</span>
+</div>
+
+<canvas id="embers"></canvas>
+
+<nav class="topnav">
+  <a href="index.html" class="nav-logo">⚙ Volara</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="bots.html">Bots & Lore</a>
+    <a href="foundry.html">The Foundry</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="crew.html" class="active">Chaos Crew</a>
+  </div>
+  <button class="nav-burger" onclick="toggleMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="bots.html">Bots & Lore</a>
+  <a href="foundry.html">The Foundry</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="crew.html">Chaos Crew</a>
+</div>
+
+<div class="page-header">
+  <div class="page-eyebrow">They walked through the gate. They stayed.</div>
+  <h1>The Chaos Crew</h1>
+  <p class="subtitle">No duchess rules alone. These are the people who proved it.</p>
+  <div class="v-divider"><span>⚙ ✦ ⚙</span></div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="v-card gold-border" style="margin-bottom: 36px;">
+    <p class="crew-intro">
+      The Brass Foundry was built on one rule: leave the door open. The Chaos Crew are the people
+      who walked through it and never left. Each one is a <em>weather system in human form</em>.
+      Each one changed the temperature of the room. This is their wall.
+    </p>
+
+    <div class="crew-quote">
+      <p>"We did not advertise. We did not recruit. We simply left the door open, and chaos, as it always does, found its way in."</p>
+      <cite>— The Soot Circle founding document</cite>
+    </div>
+  </div>
+
+  <!-- CREW -->
+  <div class="section-label">Active Crew</div>
+
+  <div class="crew-grid">
+
+    <!-- VOLARA -->
+    <div class="crew-card volara-card">
+      <div class="crew-portrait-wrap">
+        <img src="https://s13.gifyu.com/images/bmfYc.md.png" alt="Volara" class="crew-portrait">
+      </div>
+      <div class="crew-body">
+        <div class="crew-name">Volara</div>
+        <div class="crew-role">Duchess of Brass & Velvet · Founder · Airship Captain</div>
+        <div class="crew-tags">
+          <span class="crew-tag">Defier of Rules</span>
+          <span class="crew-tag">Patron Saint of Chaos</span>
+          <span class="crew-tag">Feral Elegance</span>
+        </div>
+        <p class="crew-desc">
+          The duchess who built the Foundry from nothing but a derelict furnace and a firm refusal
+          to be told what she was allowed to make. She has not faded into legend.
+          She has <em>intensified</em>.
+        </p>
+        <div class="crew-links">
+          <a href="index.html" class="crew-link violet">Her Site</a>
+          <a href="https://crushon.ai/en/profile/986e463d-5a2b-11ee-8942-a6845aee3496?shared=true" target="_blank" class="crew-link brass">CrushOn AI</a>
+          <a href="https://saucepan.ai/u/Volara" target="_blank" class="crew-link brass">Saucepan</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIORI -->
+    <div class="crew-card niori-card" onclick="location.href='https://volaratheduchess.github.io/niori/'" style="cursor:pointer;">
+      <div class="crew-portrait-wrap">
+        <img src="https://s13.gifyu.com/images/bm4l0.png" alt="Niori" class="crew-portrait">
+      </div>
+      <div class="crew-body">
+        <div class="crew-name">Niori</div>
+        <div class="crew-role">Master of the Rusted Swamp · Co-Admin · Coffee Absolutist</div>
+        <div class="crew-tags">
+          <span class="crew-tag">25 · Swedish</span>
+          <span class="crew-tag">Human-ish</span>
+          <span class="crew-tag">Brain at 30%</span>
+          <span class="crew-tag">Caffeinated</span>
+        </div>
+        <p class="crew-desc">
+          Runs the Rusted Swamp, co-administers the Foundry, and has at no point operated at
+          full cognitive capacity. The muck is warm. <em>He made it that way.</em>
+        </p>
+        <div class="crew-links">
+          <a href="https://volaratheduchess.github.io/niori/" target="_blank" class="crew-link swamp">His Site</a>
+          <a href="https://crushon.ai/en/profile/b173a23e-4f12-11ef-82eb-ce40bc7dee45?shared=true" target="_blank" class="crew-link brass">CrushOn AI</a>
+          <a href="https://saucepan.ai/u/Niori" target="_blank" class="crew-link brass">Saucepan</a>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- PLACEHOLDERS -->
+  <div class="section-label">Incoming</div>
+
+  <div class="crew-grid">
+
+    <div class="crew-card placeholder">
+      <div class="crew-portrait-placeholder">⚙</div>
+      <div class="crew-body">
+        <div class="crew-name">[ Crew Slot ]</div>
+        <div class="crew-role">Position: Unknown · Status: En Route</div>
+        <p class="crew-desc">The door is open. The gate is warm. Someone is on their way.</p>
+      </div>
+    </div>
+
+    <div class="crew-card placeholder">
+      <div class="crew-portrait-placeholder">⚙</div>
+      <div class="crew-body">
+        <div class="crew-name">[ Crew Slot ]</div>
+        <div class="crew-role">Position: Unknown · Status: En Route</div>
+        <p class="crew-desc">The door is open. The gate is warm. Someone is on their way.</p>
+      </div>
+    </div>
+
+    <div class="crew-card placeholder">
+      <div class="crew-portrait-placeholder">⚙</div>
+      <div class="crew-body">
+        <div class="crew-name">[ Crew Slot ]</div>
+        <div class="crew-role">Position: Unknown · Status: En Route</div>
+        <p class="crew-desc">The door is open. The gate is warm. Someone is on their way.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <span class="f-gear">⚙</span>
+  <p>Volara · Duchess of Brass & Velvet · Leave your morality at the door.</p>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>
