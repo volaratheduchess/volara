@@ -70,6 +70,67 @@
         margin: 0 auto;
       }
     }
+
+
+
+
+        /* paramour section */
+    .paramour-card {
+      background: linear-gradient(145deg, #1a0028, #0a0018);
+      border: 1px solid #3a006a;
+      border-left: 3px solid #5900ff;
+      border-radius: 8px;
+      padding: 28px 34px;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .paramour-card:hover {
+      border-color: #7a2fff;
+      box-shadow: 0 0 30px rgba(89,0,255,0.2);
+      transform: translateY(-3px);
+    }
+    .paramour-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #5900ff;
+      flex-shrink: 0;
+    }
+    .paramour-card .p-text h3 {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 0.95em;
+      color: #00ffee;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .paramour-card .p-text p {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.9em;
+      color: #7a6a9a;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .paramour-card .p-text span {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 0.68em;
+      letter-spacing: 2px;
+      color: #5900ff;
+      border: 1px solid #3a006a;
+      padding: 4px 12px;
+      border-radius: 3px;
+    }
+
+    @media (max-width: 768px) {
+      .portrait-row { grid-template-columns: 1fr; }
+      .paramour-card { flex-direction: column; text-align: center; }
+    }
   </style>
 </head>
 <body>
@@ -231,6 +292,22 @@
       </a>
     </div>
   </div>
+
+ <!-- PARAMOUR -->
+  <div class="v-card" style="margin-bottom: 28px;">
+    <h2>The Paramour</h2>
+    <p>Chaos finds its counterpart. Or in this case — its accomplice.</p>
+  </div>
+  <a href="https://volaratheduchess.github.io/niori/" target="_blank" class="paramour-card" style="margin-bottom: 28px; display: flex;">
+    <img src="https://s13.gifyu.com/images/bm4l0.png" alt="Niori">
+    <div class="p-text">
+      <h3>Niori</h3>
+      <p>Runs the Rusted Swamp, co-administers the Foundry, and has at no point operated at
+          full cognitive capacity. The muck is warm. <em>He made it that way.</em></p>
+      <span>Visit His Site →</span>
+    </div>
+  </a>
+
 
 </div>
 
